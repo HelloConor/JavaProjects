@@ -7,19 +7,20 @@ public class AbstractPersonTest {
 		
 		Person[] people = new Person[3];
 		
-		people[0] = new Employee("Harry Smith", 45000, 2005, 06, 12, "reading");
-		people[1] = new Student("Gabriel Karski", "English Literature", "cinema");
-		people[2] = new Workout("Ken Williams", "Push, Pull, Legs", "mountaineering");
+		people[0] = new Employee("Harry Smith", 45000, 2005, 06, 12, "reading", "Manchester");
+		people[1] = new Student("Gabriel Karski", "English Literature", "cinema", "London");
+		people[2] = new Workout("Ken Williams", "Push, Pull, Legs", "mountaineering", "Liverpool");
 				
 		for (Person p : people)
-			System.out.println(p.getName() + ", " + p.getDescription() + ", " + p.getFaveHobby());
+			System.out.println(p.getName() + ", " + p.getDescription() + ", " + p.getFaveHobby() + ", " + p.getCity());
 	}
 }
 
 abstract class Person {
-	public Person(String aName, String aHobby) {
+	public Person(String aName, String aHobby, String aCity) {
 		name = aName;
 		hobby = aHobby;
+		city = aCity;
 				
 	}
 	
@@ -34,6 +35,10 @@ abstract class Person {
 		return hobby;
 	}
 	
+	public String getCity() {
+		return city;
+	}
+	
 	public String getFaveHobby() {
 		return getFaveHobby;
 	}
@@ -42,17 +47,19 @@ abstract class Person {
 	private String name;
 	private String hobby;
 	private String getFaveHobby;
+	private String city;
 	
 }
 
 class Employee extends Person {
-	public Employee(String aName, double aSalary, int year, int month, int day, String aHobby) {
+	public Employee(String aName, double aSalary, int year, int month, int day, String aHobby, String aCity) {
 		
-		super(aName, aHobby);
+		super(aName, aHobby, aCity);
 		hobby = aHobby;		
 		salary = aSalary;
 		GregorianCalendar calendar = new GregorianCalendar(year, month -1, day);
 		hireDay = calendar.getTime();
+		city = aCity;
 	}
 	
 	public double getSalary() {
@@ -65,6 +72,10 @@ class Employee extends Person {
 	
 	public String getHobby() {
 		return hobby;
+	}
+	
+	public String getCity() {
+		return city;
 	}
 	
 	public String getDescription() {
@@ -83,15 +94,17 @@ class Employee extends Person {
 	private double salary;
 	private Date hireDay;	
 	private String hobby;
+	private String city;
 }
 
 class Student extends Person {
 	
-	public Student(String aName, String aDegree, String aHobby) {
+	public Student(String aName, String aDegree, String aHobby, String aCity) {
 		// pass aName to superclass constructor
-		super(aName, aHobby);
+		super(aName, aHobby, aCity);
 		hobby = aHobby;
 		degree = aDegree;
+		city = aCity;
 	}
 	
 	public String getDescription() {
@@ -105,13 +118,14 @@ class Student extends Person {
 	
 	private String degree;
 	private String hobby;
+	private String city;
 }
 
 class Workout extends Person {
 	
-	public Workout(String aName, String aRoutine, String aHobby) {
+	public Workout(String aName, String aRoutine, String aHobby, String aCity) {
 		
-		super(aName, aHobby);
+		super(aName, aHobby, aCity);
 		hobby = aHobby;
 		routine = aRoutine;
 	}
